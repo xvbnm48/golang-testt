@@ -1,7 +1,7 @@
 package go_testing_baru
 
 type Speeder interface {
-	MaxSPeed() int
+	MaxSpeed() int
 }
 
 func NewCar(speeder Speeder) *Car {
@@ -16,8 +16,8 @@ type Car struct {
 
 func (c Car) Speed() int {
 	defaultSpeed := 80
-	if defaultSpeed > c.Speeder.MaxSPeed() {
-		return c.Speeder.MaxSPeed()
+	if defaultSpeed > c.Speeder.MaxSpeed() {
+		return c.Speeder.MaxSpeed()
 	}
 	return defaultSpeed
 }
@@ -25,13 +25,13 @@ func (c Car) Speed() int {
 type DefaultEngine struct {
 }
 
-func (e DefaultEngine) MaxSPeed() int {
-	return 51
+func (e DefaultEngine) MaxSpeed() int {
+	return 50
 }
 
 type TurboEngine struct {
 }
 
-func (e TurboEngine) MaxSPeed() int {
+func (e TurboEngine) MaxSpeed() int {
 	return 100
 }
