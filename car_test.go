@@ -47,6 +47,12 @@ func TestTurboEngine_MaxSpeed(t *testing.T) {
 	}
 }
 
+type FakeEngine struct {
+}
+
+func (e FakeEngine) MaxSpeed() int {
+	return 5
+}
 func TestCar_Speed(t *testing.T) {
 	type fields struct {
 		Speeder Speeder
@@ -65,6 +71,10 @@ func TestCar_Speed(t *testing.T) {
 			name:   "speed should be 80 when use Turbo engine",
 			fields: fields{Speeder: &TurboEngine{}},
 			want:   80,
+		}, {
+			name:   "speed should be 20 when use max speed is less than 10",
+			fields: fields{Speeder: &FakeEngine{}},
+			want:   20,
 		},
 	}
 	for _, tt := range tests {
