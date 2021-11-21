@@ -13,7 +13,7 @@ func getUser(db UserDB) http.HandlerFunc {
 	//injection
 	return func(w http.ResponseWriter, r *http.Request) {
 		type user struct {
-			Name string `json:'name'`
+			Name string `json:"name"`
 		}
 		name, err := db.FindByID("1")
 		if err != nil {
