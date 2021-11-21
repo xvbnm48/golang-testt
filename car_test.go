@@ -1,6 +1,8 @@
 package go_testing_baru
 
 import (
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
 	"testing"
 )
 
@@ -52,6 +54,27 @@ type FakeEngine struct {
 
 func (e FakeEngine) MaxSpeed() int {
 	return 5
+}
+
+type MockEngine struct {
+	mock.Mock
+}
+
+func (m MockEngine) MaxSpeed() int {
+	args := m.Called()
+	return args.Get(0).(int)
+}
+
+func TestCar_Speed_WithMock(t *testing.T) {
+	mock := new(MockEngine)
+	car := Car{
+		Speeder: mock,
+	}
+
+	mock.On("MaxSpeed").Return(9)
+	speed := car.Speed()
+	assert.Equal(t, 20, speed)
+
 }
 func TestCar_Speed(t *testing.T) {
 	type fields struct {
